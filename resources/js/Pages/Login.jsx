@@ -23,17 +23,12 @@ export default function Login() {
                         <h1 className="mt-4 text-4xl font-semibold text-white sm:text-5xl">
                             Reward every checkout with achievements and badges.
                         </h1>
-                        <p className="mt-4 text-lg text-slate-300">
-                            Sign in with any email to simulate purchases, unlock achievements,
-                            and preview cashback triggers.
-                        </p>
                     </div>
 
                     <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-8 shadow-xl shadow-slate-950/50">
                         <h2 className="text-xl font-semibold text-white">Quick Login</h2>
-                        <p className="mt-2 text-sm text-slate-400">
-                            Use a real-looking email address. We will create the account if it
-                            does not exist.
+                        <p className="mt-2 text-xs text-slate-400">
+                           Login with your email account, your account will be created if it doesn't exist.
                         </p>
 
                         {auth?.user ? (
@@ -74,7 +69,7 @@ export default function Login() {
                                     disabled={processing}
                                     className="w-full rounded-2xl bg-amber-400 px-4 py-3 font-semibold text-slate-950 transition hover:bg-amber-300 disabled:opacity-60"
                                 >
-                                    Enter workspace
+                                    Sign in
                                 </button>
                             </form>
                         )}

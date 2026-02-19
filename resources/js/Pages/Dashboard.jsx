@@ -70,9 +70,15 @@ export default function Dashboard() {
                                         ))}
                                     </ul>
                                 ) : (
+                                    summary?.unlocked_achievements?.length ? (
                                     <p className="mt-3 text-sm text-slate-400">
                                         All achievements completed.
                                     </p>
+                                    ) : (
+                                        <p className="mt-3 text-sm text-slate-400">
+                                            No achievements available yet
+                                        </p>
+                                    )
                                 )}
                             </div>
                         </>
@@ -92,7 +98,11 @@ export default function Dashboard() {
                                 </p>
                                 <p className="mt-4 text-sm text-slate-400">Next badge</p>
                                 <p className="text-xl text-amber-200">
-                                    {summary?.next_badge ?? 'All badges unlocked'}
+                                    {summary?.next_badge
+                                        ? summary.next_badge
+                                        : summary?.current_badge
+                                            ? 'All badges unlocked'
+                                            : 'No badges configured'}
                                 </p>
                             </>
                         )}
@@ -111,7 +121,7 @@ export default function Dashboard() {
                                     NGN {summary?.remaining_to_unlock_next_badge ?? 0}
                                 </p>
                                 <p className="mt-4 text-xs uppercase tracking-[0.25em] text-slate-500">
-                                    Cashback: NGN {loyalty?.cashbackAmount ?? 300} on new badge unlock
+                                    Unlock badge and get  NGN {loyalty?.cashbackAmount ?? 300}
                                 </p>
                             </>
                         )}

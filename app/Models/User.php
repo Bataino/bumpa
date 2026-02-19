@@ -42,4 +42,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function achievements()
+    {
+        return $this->belongsToMany(Achievement::class)->withPivot('unlocked_at');
+    }
+
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class)->withPivot('unlocked_at');
+    }
 }

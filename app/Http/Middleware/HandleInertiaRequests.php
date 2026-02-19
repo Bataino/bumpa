@@ -22,6 +22,9 @@ class HandleInertiaRequests extends Middleware
                     'email' => $user->email,
                 ] : null,
             ],
+            'loyalty' => [
+                'cashbackAmount' => (int) config('loyalty.cashback_amount', 300),
+            ],
             'flash' => [
                 'success' => $request->session()->get('success'),
             ],

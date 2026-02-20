@@ -232,13 +232,7 @@ export default function Dashboard() {
                                             </p>
                                             <div className="mt-4 h-1 rounded-full bg-slate-800">
                                                 <div
-                                                    className={`h-1 rounded-full transition-all ${
-                                                        unlocked
-                                                            ? 'bg-amber-400'
-                                                            : isNext
-                                                                ? 'bg-slate-600'
-                                                                : 'bg-slate-700'
-                                                    }`}
+                                                    className="h-1 rounded-full bg-amber-400/40 transition-all"
                                                     style={{ width: `${progressToBadge}%` }}
                                                 />
                                             </div>

@@ -114,7 +114,7 @@ export default function Dashboard() {
     return (
         <Layout>
             <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-                <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
+                <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 fade-in-up">
                     <h2 className="text-2xl font-semibold text-white">Loyalty Dashboard</h2>
                     <p className="mt-2 text-sm text-slate-400">
                         Track achievements unlocked by your recent purchases.
@@ -130,17 +130,18 @@ export default function Dashboard() {
                                 </h3>
                                 {achievementItems.length ? (
                                     <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                                        {achievementItems.map((achievement) => {
+                                        {achievementItems.map((achievement, index) => {
                                             const Icon = iconForAchievement(achievement.type);
 
                                             return (
                                                 <div
                                                     key={achievement.name}
-                                                    className={`rounded-2xl border px-4 py-4 transition ${
+                                                    className={`rounded-2xl border px-4 py-4 transition fade-in-up ${
                                                         achievement.unlocked
                                                             ? 'border-amber-500/80 bg-amber-500/30 text-slate-100'
                                                             : 'border-slate-800 bg-slate-950/40 text-slate-500'
                                                     }`}
+                                                    style={{ animationDelay: `${index * 60}ms` }}
                                                 >
                                                     <div className="flex flex-col items-center justify-center">
                                                         <span
@@ -179,7 +180,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="space-y-6">
-                    <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900/60 to-slate-950 p-6">
+                    <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900/60 to-slate-950 p-6 fade-in-up">
                         <div className="flex items-center justify-between">
                             <h3 className="text-lg font-semibold text-white">Badge Status</h3>
                             <div className="flex gap-2 text-xs text-slate-400">
@@ -229,7 +230,7 @@ export default function Dashboard() {
                         )}
                     </div>
 
-                    <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6">
+                    <div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 fade-in-up">
                         <h3 className="text-lg font-semibold text-white">
                             Progress to <span className="text-amber-200">{summary?.next_badge ?? 'Next Badge'}</span>
                         </h3>
@@ -237,7 +238,7 @@ export default function Dashboard() {
                             <p className="mt-4 text-sm text-slate-400">Calculating...</p>
                         ) : (
                             <>
-                                <div className="relative mx-auto my-10 flex h-48 w-48 items-center justify-center">
+                                <div className="relative mx-auto my-10 flex h-48 w-48 items-center justify-center fade-in-up">
                                     <Doughnut
                                         data={progressChartData}
                                         options={{

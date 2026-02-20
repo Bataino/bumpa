@@ -49,18 +49,28 @@ This project implements a minimal full-stack loyalty program for an e-commerce s
    php artisan migrate --seed
    ```
 
-5. Start the app:
+5. Start the backend:
    ```bash
    php artisan serve
+   ```
+6.Start the frontend (Vite):
+   ```bash
    npm run dev
    ```
+7. Test
+   Run the test 
+   ```bash
+   php artisan serve
+   ```
+7. Open:
+   - `http://127.0.0.1:8000`
 
 ## Usage
 - Visit `/` to log in with any email (user is created if missing).
 - Go to `/checkout` to simulate paid orders.
 - Visit `/dashboard` to see achievements, badges, and progress.
 
-## API
+## API - Can Test this using php artisan test
 `GET /api/users/{user}/achievements`
 Returns:
 ```json
@@ -73,10 +83,6 @@ Returns:
 }
 ```
 
-## Tests
-```bash
-php artisan test
-```
 
 ## Notes
 - Cashback uses Paystack sandbox `transaction/initialize` and logs the response.

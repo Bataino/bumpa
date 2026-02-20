@@ -84,6 +84,8 @@ class LoyaltyTest extends TestCase
             'current_badge',
             'next_badge',
             'remaining_to_unlock_next_badge',
+            'total_spent',
+            'badge_thresholds',
         ]);
     }
 }

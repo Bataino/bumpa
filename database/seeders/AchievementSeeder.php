@@ -15,37 +15,37 @@ class AchievementSeeder extends Seeder
     {
         $achievements = [
             [
-                'name' => 'Spend NGN 1,000 Total',
+                'name' => 'Spendthrift',
                 'type' => 'total_spent',
                 'criteria' => ['amount' => 1000],
                 'description' => 'Reach NGN 1,000 in total paid orders.',
             ],
             [
-                'name' => 'Spend NGN 5,000 Total',
+                'name' => 'Thrifty',
                 'type' => 'total_spent',
                 'criteria' => ['amount' => 5000],
                 'description' => 'Reach NGN 5,000 in total paid orders.',
             ],
             [
-                'name' => 'Spend NGN 10,000 Total',
+                'name' => 'Thousands Club',
                 'type' => 'total_spent',
                 'criteria' => ['amount' => 10000],
                 'description' => 'Reach NGN 10,000 in total paid orders.',
             ],
             [
-                'name' => 'Two Orders in a Day',
+                'name' => 'Perpetual Buyer',
                 'type' => 'orders_in_timeframe',
                 'criteria' => ['count' => 2, 'window' => 'day'],
                 'description' => 'Place two paid orders within the same day.',
             ],
             [
-                'name' => 'Four Orders in a Week',
+                'name' => 'Unstoppable',
                 'type' => 'orders_in_timeframe',
                 'criteria' => ['count' => 4, 'window' => 'week'],
                 'description' => 'Place four paid orders within the same week.',
             ],
             [
-                'name' => 'Three Premium Orders',
+                'name' => 'Premium Customer',
                 'type' => 'orders_min_amount',
                 'criteria' => ['count' => 3, 'min_amount' => 5000],
                 'description' => 'Place three paid orders worth at least NGN 5,000 each.',

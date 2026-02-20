@@ -29,6 +29,16 @@ export default function Dashboard() {
         []
     );
 
+    const currentBadgeIndex = useMemo(() => {
+        if (!summary?.current_badge) {
+            return -1;
+        }
+
+        return badgeThresholds.findIndex(
+            (badge) => badge.name === summary.current_badge
+        );
+    }, [summary, badgeThresholds]);
+
     const progressPercent = useMemo(() => {
         if (!summary) {
             return 0;
@@ -181,52 +191,61 @@ export default function Dashboard() {
 
                 <div className="space-y-6">
                     <div className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900/60 to-slate-950 p-6 fade-in-up">
-                        <div className="flex items-center justify-between">
-                            <h3 className="text-lg font-semibold text-white">Badge Status</h3>
-                            <div className="flex gap-2 text-xs text-slate-400">
-                                {badgeThresholds.map((badge) => (
-                                    <span
-                                        key={badge.name}
-                                        className={`rounded-full border px-3 py-1 ${
-                                            summary?.current_badge === badge.name
-                                                ? 'border-amber-400 text-amber-200'
-                                                : 'border-slate-700 text-slate-400'
-                                        }`}
-                                    >
-                                        {badge.name}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
+                        <h3 className="text-lg font-semibold text-white">Badges</h3>
                         {loading ? (
-                            <p className="mt-4 text-sm text-slate-400">Loading badge...</p>
+                            <p className="mt-4 text-sm text-slate-400">Loading badges...</p>
                         ) : (
-                            <>
-                                <p className="mt-4 text-sm text-slate-400">Current badge</p>
-                                <p className="text-2xl font-semibold text-white">
-                                    {summary?.current_badge ?? 'No badge yet'}
-                                </p>
-                                <p className="mt-4 text-sm text-slate-400">Next badge</p>
-                                <p className="text-xl text-amber-200">
-                                    {summary?.next_badge
-                                        ? summary.next_badge
-                                        : summary?.current_badge
-                                            ? 'All badges unlocked'
-                                            : 'No badges configured'}
-                                </p>
-                                <div className="mt-6">
-                                    <div className="flex items-center justify-between text-xs text-slate-400">
-                                        <span>Progress to next badge</span>
-                                        <span>{progressPercent}%</span>
-                                    </div>
-                                    <div className="mt-2 h-3 w-full rounded-full bg-slate-800">
+                            <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                                {badgeThresholds.map((badge, index) => {
+                                    const unlocked = index <= currentBadgeIndex;
+                                    const isNext = summary?.next_badge === badge.name;
+                                    const totalSpent = summary?.total_spent ?? 0;
+                                    const progressToBadge = Math.min(
+                                        100,
+                                        Math.round((totalSpent / badge.threshold) * 100)
+                                    );
+
+                                    return (
                                         <div
-                                            className="h-3 rounded-full bg-amber-400 transition-all"
-                                            style={{ width: `${progressPercent}%` }}
-                                        />
-                                    </div>
-                                </div>
-                            </>
+                                            key={badge.name}
+                                            className={`rounded-2xl border px-4 py-5 text-center transition fade-in-up ${
+                                                unlocked
+                                                    ? 'border-amber-400/60 bg-amber-500/10 text-slate-100'
+                                                    : 'border-slate-800 bg-slate-950/40 text-slate-500'
+                                            }`}
+                                            style={{ animationDelay: `${index * 80}ms` }}
+                                        >
+                                            <div
+                                                className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full border ${
+                                                    unlocked
+                                                        ? 'border-amber-300/60 bg-amber-400/20 text-amber-200'
+                                                        : 'border-slate-700 bg-slate-900 text-slate-400'
+                                                }`}
+                                            >
+                                                <span className="text-lg">🏆</span>
+                                            </div>
+                                            <p className="mt-4 text-sm font-semibold">
+                                                {badge.name}
+                                            </p>
+                                            <p className="mt-1 text-xs text-slate-500">
+                                                NGN {badge.threshold.toLocaleString()}
+                                            </p>
+                                            <div className="mt-4 h-1 rounded-full bg-slate-800">
+                                                <div
+                                                    className={`h-1 rounded-full transition-all ${
+                                                        unlocked
+                                                            ? 'bg-amber-400'
+                                                            : isNext
+                                                                ? 'bg-slate-600'
+                                                                : 'bg-slate-700'
+                                                    }`}
+                                                    style={{ width: `${progressToBadge}%` }}
+                                                />
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         )}
                     </div>
 
